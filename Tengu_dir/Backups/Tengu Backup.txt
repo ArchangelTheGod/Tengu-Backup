@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tengu, Axxl's Virtual Assistant</title>
+    <style>
+body{background-color: rgb(255, 0, 183);}
+h1{color: rgb(234, 234, 234);}
+    </style>
+</head>
+<link rel="shortcut icon" type="image/png" href="img/favicon.png">
+<body onload="greeting()">
+<h1> Tengu</h1>
+<div class="wrapper">
+    <div class="actions">
+        <button id="start">Say Command</button>
+        <button id="end">End Command Execution</button>
+    </div>
+    <div id="transcript">
+    </div>
+</div>
+<script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+const transcript_element = document.getElementById("transcript");
+const talk_button = document.getElementById("start");
+const end_button = document.getElementById("end");
+
+let p = document.createElement("p");
+transcript_element.appendChild(p);
+
+recognition.addEventListener("result", (e) =>{
+    const transcript = Array.from(e.results)
+    .map(result => result [0])
+    .map(result => result.transcript)
+    .join("");
+    p.textContent = transcript;
+    if(e.results[0].isFinal){
+        p = document.createElement("p")
+        p.textContent = transcript;
+        transcript_element.appendChild(p);
+        p.textContent = "";
+
+        if(transcript.includes("open YouTube")){
+            window.open('https://www.youtube.com/')
+        }
+        if(transcript.includes("protocol X")){
+            window.open('https://www.github.com/')
+        }
+        if(transcript.includes("Discord")){
+            window.open('https://www.discord.com/')
+        }
+        if(transcript.includes("Wikipedia")){
+            window.open('https://www.wikipedia.com')
+        }
+        if(transcript.includes("Twitter")){
+            window.open('https://www.twitter.com/')
+        }
+        if(transcript.includes("Reddit")){
+            window.open('https://reddit.com/')
+        }
+        if(transcript.includes("Facebook")){
+            window.open('https://facebook.com/')
+        }
+        // if(transcript.includes("close YouTube")){
+        //     window.top.close('https://www.youtube.com/')
+        // }
+        if(transcript.includes("Spotify")){
+            window.open("https://open.spotify.com/")
+        }
+        if(transcript.includes("Tengu updates")){
+            alert("Update Version 0.9")
+        }
+    }
+
+});
+
+function greeting(){
+    alert("Hello! I'm Tengu!")
+}
+recognition.addEventListener("end", ()=>{
+    end_button.disabled = false;
+    talk_button.disabled = true;
+});
+talk_button.addEventListener("click", () =>{
+    end_button.disabled = false;
+    talk_button.disabled = true;
+    recognition.start();
+});
+end_button.addEventListener("click", () => {
+    end_button.disabled = true;
+    talk_button.disabled = false;
+    recognition.stop();
+});
+
+</script>
+</body>
+</html>
