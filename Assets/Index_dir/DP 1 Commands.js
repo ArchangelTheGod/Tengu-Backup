@@ -24,7 +24,7 @@ if (e.results[0].isFinal) {
   p.textContent = "";
 
   if (transcript.includes("updates")) {
-    alert("Update Version: TEST SERVER 1.4 Stable");
+    alert("Update Version: TEST SERVER 1.4.1 BETA");
   }
   if (transcript.includes("SRC")) {
     window.open("https://github.com/AxxlYT/Tengu-Assistant");
@@ -34,6 +34,9 @@ if (e.results[0].isFinal) {
   // }
   if (transcript.includes("open YouTube")) {
     window.open("https://www.youtube.com");
+  }
+  if(transcript.includes("backup")){
+    window.open("https://github.com/AxxlYT/Tengu-Backup")
   }
 }
 });

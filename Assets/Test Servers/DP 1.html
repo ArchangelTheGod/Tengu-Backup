@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Tengu DP 1</title>
+    <style>
+body{background-color: rgb(201, 2, 118);}
+h1{color: rgb(234, 234, 234);}
+    </style>
+</head>
+<link rel="shortcut icon" type="image/png" href="/Assets/img/favicon.png">
+<body onload="greeting()">
+<h1> Tengu DP 1 V1.4.1 BETA</h1>
+<div class="wrapper">
+    <div class="actions">
+        <button id="start">Say Command</button>
+        <button id="end">End Command Execution</button>
+        <!-- CSS Styles -->
+<style>
+    .speech {
+      border: 1px solid #ddd;
+      width: 275px;
+      padding: 0;
+      margin: 0;
+    }
+    .speech input {
+      border: 0;
+      width: 240px;
+      display: inline-block;
+      height: 30px;
+    }
+    .speech img {
+      float: right;
+      width: 30px;
+    }
+  </style>
+  
+  <!-- Search Form -->
+  <form id="labnol" method="get" action="https://www.google.com/search">
+    <div class="speech">
+      <input type="text" name="q" id="transcript" placeholder="Search" />
+      <img onclick="startDictation()" src="/Assets/img/speak.png" />
+    </div>
+  </form>
+  
+  <!-- HTML5 Speech Recognition API -->
+  <script>
+    function startDictation() {
+      if (window.hasOwnProperty('webkitSpeechRecognition')) {
+        var recognition = new webkitSpeechRecognition();
+  
+        recognition.continuous = false;
+        recognition.interimResults = false;
+  
+        recognition.lang = 'en-US';
+        recognition.start();
+  
+        recognition.onresult = function (e) {
+          document.getElementById('transcript').value = e.results[0][0].transcript;
+          recognition.stop();
+          document.getElementById('labnol').submit();
+        };
+  
+        recognition.onerror = function (e) {
+          recognition.stop();
+        };
+      }
+    }
+  </script>
+    </div>
+    <div id="transcript">
+    </div>
+</div>
+<script src="/Assets/Index_dir/DP 1 Commands.js">
+</script>
+</body>
+</html>
